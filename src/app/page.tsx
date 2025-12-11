@@ -36,10 +36,16 @@ export default function HomePage() {
       </section>
 
       <section className="rounded-lg border border-slate-800 bg-slate-900/40 p-4 text-xs text-slate-400">
-        提示：所有功能都需要登录后才能使用，后续我们会接入 Google 登录，确保每个人都有 3 票且不可重复或撤销。
+        提示：所有功能都需要登录后才能使用。使用 Google 登录后，每位用户拥有 3 票，只能投给 3 个不同的作品，投出后不能撤销。
       </section>
     </div>
   );
 }
+
+
+
+
+
+
 
 
