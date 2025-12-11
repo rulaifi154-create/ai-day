@@ -7,28 +7,31 @@ export async function GET() {
   try {
     const { data: works, error } = await supabase
       .from('works')
-      .select(`
-        *,
-        users!works_author_id_fkey (
-          name,
-          email
-        )
-      `)
+      .select('*')
       .order('created_at', { ascending: false });
 
     if (error) throw error;
 
-    // 获取每个作品的票数
+    // 获取每个作品的票数和作者信息
     const worksWithVotes = await Promise.all(
       (works || []).map(async (work) => {
+        // 获取票数
         const { count } = await supabase
           .from('votes')
           .select('*', { count: 'exact', head: true })
           .eq('work_id', work.id);
 
+        // 获取作者信息
+        const { data: author } = await supabase
+          .from('users')
+          .select('name, email')
+          .eq('id', work.author_id)
+          .single();
+
         return {
           ...work,
           voteCount: count || 0,
+          users: author || { name: null, email: '未知' },
         };
       })
     );
