@@ -9,7 +9,7 @@ export async function GET() {
       .from('works')
       .select(`
         *,
-        users:author_id (
+        users!works_author_id_fkey (
           name,
           email
         )

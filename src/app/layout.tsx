@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { ReactNode } from "react";
-import { SessionProvider } from "next-auth/react";
+import Providers from "@/components/Providers";
 import AuthButton from "@/components/AuthButton";
 
 export const metadata = {
@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="zh-CN">
       <body className="min-h-screen bg-slate-950 text-slate-50">
-        <SessionProvider>
+        <Providers>
           <div className="mx-auto flex min-h-screen max-w-5xl flex-col px-4 py-6">
             <header className="mb-6 flex items-center justify-between border-b border-slate-800 pb-4">
               <div>
@@ -43,7 +43,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               AI-Day 活动 · 持续开放 · 使用 Google 登录参与提交与投票
             </footer>
           </div>
-        </SessionProvider>
+        </Providers>
       </body>
     </html>
   );
